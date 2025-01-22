@@ -49,7 +49,8 @@ const readMail = (Recipient) => __awaiter(void 0, void 0, void 0, function* () {
             console.log(`No messages found for recipient: ${Recipient}`);
             return;
         }
-        Messages.forEach(({ Sender, Message }) => {
+        Messages.forEach(({ ShortID, Sender, Message }) => {
+            console.log(`Message ID: ${ShortID}`);
             console.log(`from: ${Sender || 'Unknown sender'}`);
             console.log(`${Message || 'No content'}`);
         });

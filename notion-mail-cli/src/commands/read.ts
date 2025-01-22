@@ -21,7 +21,8 @@ export const readMail = async (Recipient: string): Promise<void> => {
             return;
         }
 
-        Messages.forEach(({ Sender, Message }: { Sender: string; Message: string }) => {
+        Messages.forEach(({ ShortID, Sender, Message }: { ShortID: string; Sender: string; Message: string }) => {
+            console.log(`Message ID: ${ShortID}`);
             console.log(`from: ${Sender || 'Unknown sender'}`);
             console.log(`${Message || 'No content'}`);
         });
