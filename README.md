@@ -3,7 +3,7 @@
 
 ## Overview
 
-Notion Mail CLI is a simple command-line tool that lets you send and read messages using the Notion API. Messages are stored as pages within a Notion database, providing an easy way to organize and access them. Whether you're looking for a lightweight alternative to traditional email or just want to experiment with Notion's powerful API, this tool has you covered.
+Notion Mail CLI is a simple command-line tool that lets you send and read messages using the Notion API. It also will output a messageId once you send a message or read a message allowing you to DELETE that specific messageid. Messages are stored as pages within a Notion database, providing an easy way to organize and access them. Whether you're looking for a lightweight alternative to traditional email or just want to experiment with Notion's powerful API, this tool has you covered.
 
 ## Improvements Implemented
 
@@ -70,11 +70,20 @@ To retrieve messages sent to a specific recipient, run:
 ```bash
 node dist/notion-mail-cli/src/index.js read <recipient>
 ```
+### Deleting Messages
+
+To delete messages sent to a specific recipient, run:
+
+```bash
+node dist/notion-mail-cli/src/index.js delete <messageID>
+```
 
 **Example:**
 
 ```bash
-node dist/notion-mail-cli/src/index.js read "Bob"
+node dist/notion-mail-cli/src/index.js send Nima Bob Hello
+node dist/notion-mail-cli/src/index.js read Bob
+node dist/notion-mail-cli/src/index.js delete 2345
 ```
 
 ## Project Structure
@@ -86,6 +95,7 @@ notion-mail-cli
 │   ├── commands
 │   │   ├── send.ts            # Command to send messages
 │   │   └── read.ts            # Command to read messages
+│   │   └── delete.ts          # Command to delete messages
 │   ├── services
 │   │   └── notionService.ts    # Service for interacting with the Notion API
 │   └── types
