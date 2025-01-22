@@ -35,24 +35,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.readMail = void 0;
 const readMail = (Recipient) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        // Dynamically import the NotionService
         const NotionService = (yield Promise.resolve().then(() => __importStar(require('../services/notionService')))).default;
-        // Ensure environment variables are set
         const notionKey = process.env.NOTION_KEY;
         const notionPageId = process.env.NOTION_PAGE_ID;
         if (!notionKey || !notionPageId) {
             throw new Error('Missing Notion API credentials. Please check your environment variables.');
         }
-        // Create an instance of NotionService with actual API credentials
         const notionService = new NotionService(notionKey, notionPageId);
-        // Retrieve messages for the specified recipient
         const Messages = yield notionService.getMessagesForRecipient(Recipient);
-        // Check if response contains valid data
         if (!Messages || Messages.length === 0) {
             console.log(`No messages found for recipient: ${Recipient}`);
             return;
         }
-        // Display the messages safely
         Messages.forEach(({ Sender, Message }) => {
             console.log(`From: ${Sender || 'Unknown sender'}`);
             console.log(`Message: ${Message || 'No content'}`);
