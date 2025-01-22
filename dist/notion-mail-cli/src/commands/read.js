@@ -43,14 +43,15 @@ const readMail = (Recipient) => __awaiter(void 0, void 0, void 0, function* () {
         }
         const notionService = new NotionService(notionKey, notionPageId);
         const Messages = yield notionService.getMessagesForRecipient(Recipient);
+        console.log(`User: ${Recipient}`);
+        console.log(`\nMessages (${Messages.length}):\n`);
         if (!Messages || Messages.length === 0) {
             console.log(`No messages found for recipient: ${Recipient}`);
             return;
         }
         Messages.forEach(({ Sender, Message }) => {
-            console.log(`From: ${Sender || 'Unknown sender'}`);
-            console.log(`Message: ${Message || 'No content'}`);
-            console.log('---');
+            console.log(`from: ${Sender || 'Unknown sender'}`);
+            console.log(`${Message || 'No content'}`);
         });
     }
     catch (error) {

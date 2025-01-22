@@ -13,15 +13,17 @@ export const readMail = async (Recipient: string): Promise<void> => {
 
         const Messages = await notionService.getMessagesForRecipient(Recipient);
 
+        console.log(`User: ${Recipient}`);
+        console.log(`\nMessages (${Messages.length}):\n`);
+
         if (!Messages || Messages.length === 0) {
             console.log(`No messages found for recipient: ${Recipient}`);
             return;
         }
 
         Messages.forEach(({ Sender, Message }: { Sender: string; Message: string }) => {
-            console.log(`From: ${Sender || 'Unknown sender'}`);
-            console.log(`Message: ${Message || 'No content'}`);
-            console.log('---');
+            console.log(`from: ${Sender || 'Unknown sender'}`);
+            console.log(`${Message || 'No content'}`);
         });
 
     } catch (error) {
